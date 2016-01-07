@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+	<head>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<title>Stack Room</title>
+	<link rel="stylesheet" href="/style.css" />
+	</head>
+	<body>
+	<h1>Stack room: </h1>
+	<form id='form' method='POST' action='/add'>
+		<fieldset>
+			<legend>Add to queue</legend>
+			<label for='queue_name'>Who</label>
+			<input id='queue_name' name='queue_name' type='text'/>
+			<input type='submit' value='Add'/>
+		</fieldset>
+	</form>
+	<h2>
+		Queue
+		<form id='formpop' method='POST' action='/pop'><input type='submit' value='Pop'/></form>
+	</h2>
+	<ol id='queue'>
+	</ol>
+	<script>
+		var room_name = decodeURIComponent(location.pathname.match(/\/room\/(.+)/)[1])
+		document.querySelector('h1').innerHTML += ' ' + room_name
+		var form = document.getElementById('form')
+		form.setAttribute('action', form.getAttribute('action') + '/' + room_name)
+		var formpop = document.getElementById('formpop')
+		formpop.setAttribute('action', formpop.getAttribute('action') + '/' + room_name)
+		var queue = document.getElementById('queue')
+
+		askForQueue()
+
+		setInterval(function() {
+			askForQueue()
+		}, 1000)
+
+		function askForQueue () {
+			var req = new XMLHttpRequest()
+			req.onreadystatechange = function () {
+				if (req.readyState === XMLHttpRequest.DONE) {
+					if (req.status === 200) {
+						var room = JSON.parse(req.responseText)
+						console.log(room)
+						renderRoom(room)
+					} else {
+						console.log('nope', req.status)
+					}
+				}
+			}
+			req.open('GET', '/queue/'+room_name)
+			req.send(null);
+		}
+
+		function renderRoom (room) {
+			queue.innerHTML = room.queue.map(renderLi).join('')
+		}
+
+		function renderLi (name) { return '<li>'+name+'</li>' }
+	</script>
+	</body>
+</html>
