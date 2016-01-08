@@ -12,6 +12,10 @@ http.createServer((req, res) => {
     fs.createReadStream('index.html').pipe(res)
   } else if (req.url === '/style.css') {
     fs.createReadStream('style.css').pipe(res)
+  } else if (req.url === '/blast.mp3') {
+    fs.createReadStream('blast.mp3').pipe(res)
+  } else if (req.url === '/baby.mp3') {
+    fs.createReadStream('baby.mp3').pipe(res)
   } else if (req.url === '/create' && req.method === 'POST') {
     formBody(req, {}, (err, body) =>
       err ? error(res)
@@ -34,8 +38,12 @@ http.createServer((req, res) => {
       formBody(req, {}, (err, body) => {
         if (err) error(res)
         else {
-          addParticipant(app.rooms[name] || createRoom(name), body.queue_name)
-          redirect(res, `/room/${name}`).end()
+          push(app.rooms[name] || createRoom(name), body.queue_name)
+          if (req.headers.accept === 'application/json') {
+            res.end(JSON.stringify(app.rooms[name]))
+          } else {
+            redirect(res, `/room/${name}`).end()
+          }
         }
       })
     }
@@ -45,7 +53,11 @@ http.createServer((req, res) => {
     if (!name) error(res)
     else {
       pop(app.rooms[name] || createRoom(name))
-      redirect(res, `/room/${name}`).end()
+      if (req.headers.accept === 'application/json') {
+        res.end(JSON.stringify(app.rooms[name]))
+      } else {
+        redirect(res, `/room/${name}`).end()
+      }
     }
   } else if (req.url.indexOf('/queue/') === 0) {
     parts = req.url.match(/\/queue\/(.+)/)
@@ -73,9 +85,28 @@ function error (res) {
 }
 
 function createRoom () {
-  return { queue: [] }
+  return { queue: [], lastUpdated: now() }
 }
 
-function addParticipant (room, name) { room.queue.push(name) }
+function push (room, name) {
+  room.queue.push(name)
+  room.lastUpdated = now()
+}
 
-function pop (room) { room.queue.shift() }
+function pop (room) {
+  room.queue.shift()
+  room.lastUpdated = now()
+}
+
+function now () {
+  return new Date().toJSON()
+}
+
+setInterval(() => {
+  var n = Date.now()
+  Object.keys(app.rooms).forEach((key) => {
+    if (n - new Date(app.rooms[key].lastUpdated) > 24 * 60 * 60 * 1000) {
+      delete app.rooms[key]
+    }
+  })
+}, /* once a day */ 24 * 60 * 60 * 1000)
