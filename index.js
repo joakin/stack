@@ -41,21 +41,21 @@ server.post('/add/:room_name', (req, res) => {
   })
 })
 
+server.post('/pop/:room_name', (req, res) => {
+  const room_name = req.params.room_name
+
+  // TODO: Validate `room_name` room exists
+
+  pop(app.rooms[room_name] || createRoom(room_name))
+
+  res.format({
+    json: () => res.json(app.rooms[room_name])
+  })
+})
+
 server.use((req, res) => {
   var name, parts
-  if (req.url.indexOf('/pop/') === 0 && req.method === 'POST') {
-    parts = req.url.match(/\/pop\/(.+)/)
-    name = decodeURIComponent(parts && parts[1])
-    if (!name) error(res)
-    else {
-      pop(app.rooms[name] || createRoom(name))
-      if (req.headers.accept === 'application/json') {
-        res.end(JSON.stringify(app.rooms[name]))
-      } else {
-        redirect(res, `/room/${name}`).end()
-      }
-    }
-  } else if (req.url.indexOf('/queue/') === 0) {
+  if (req.url.indexOf('/queue/') === 0) {
     parts = req.url.match(/\/queue\/(.+)/)
     name = decodeURIComponent(parts && parts[1])
     if (!name) error(res)
