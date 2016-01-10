@@ -37,8 +37,7 @@ server.post('/add/:room_name', (req, res) => {
   push(app.rooms[room_name] || createRoom(room_name), queue_name)
 
   res.format({
-    json: () => res.json(app.rooms[room_name]),
-    html: () => res.redirect(`/room/${room_name}`)
+    json: () => res.json(app.rooms[room_name])
   })
 })
 
