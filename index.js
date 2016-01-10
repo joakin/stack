@@ -34,9 +34,7 @@ server.post('/add/:room_name', (req, res) => {
 
   push(app.rooms[room_name] || createRoom(room_name), queue_name)
 
-  res.format({
-    json: () => res.json(app.rooms[room_name])
-  })
+  res.json(app.rooms[room_name])
 })
 
 server.post('/pop/:room_name', (req, res) => {
@@ -46,9 +44,7 @@ server.post('/pop/:room_name', (req, res) => {
 
   pop(app.rooms[room_name] || createRoom(room_name))
 
-  res.format({
-    json: () => res.json(app.rooms[room_name])
-  })
+  res.json(app.rooms[room_name])
 })
 
 server.use((req, res) => {
