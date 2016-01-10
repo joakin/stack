@@ -1,5 +1,3 @@
-const fs = require('fs')
-const formBody = require('body/form')
 const bodyParser = require('body-parser')
 const express = require('express')
 
@@ -68,13 +66,6 @@ server.use((req, res) => {
 })
 
 server.listen(process.env.PORT || 4321)
-
-function redirect (res, url) {
-  res.writeHead(302, {
-    'Location': url
-  })
-  return res
-}
 
 function error (res) {
   res.statusCode = 500
