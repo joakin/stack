@@ -30,3 +30,4 @@ TODO
     from the stack (disabled by default)
   * [ ] Being able to manage the queue (remove participants on the middle, etc)
   * [ ] Disallow contiguous participants in queue
+  * [ ] Improve styles
