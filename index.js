@@ -20,17 +20,17 @@ server.post('/create', (req, res) => {
   res.redirect(`/room/${room_name}`)
 })
 
+server.get('/room/:name', (req, res) => {
+  const name = req.params.name
+
+  app.rooms[name] = app.rooms[name] || createRoom(name)
+
+  res.sendFile(__dirname + '/public/room.html')
+})
+
 server.use((req, res) => {
   var name, parts
-  if (req.url.indexOf('/room/') === 0) {
-    parts = req.url.match(/\/room\/(.+)/)
-    name = decodeURIComponent(parts && parts[1])
-    if (!name) error(res)
-    else {
-      app.rooms[name] = app.rooms[name] || createRoom(name)
-      fs.createReadStream('public/room.html').pipe(res)
-    }
-  } else if (req.url.indexOf('/add/') === 0 && req.method === 'POST') {
+  if (req.url.indexOf('/add/') === 0 && req.method === 'POST') {
     parts = req.url.match(/\/add\/(.+)/)
     name = decodeURIComponent(parts && parts[1])
     if (!name) error(res)
