@@ -9,6 +9,7 @@
   "author": "Joaquin Oltra <joaquin@chimeces.com> (http://chimeces.com)",
   "license": "ISC",
   "dependencies": {
-    "body": "^5.1.0"
+    "body": "^5.1.0",
+    "express": "^4.13.3"
   }
 }

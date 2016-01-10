@@ -1,12 +1,14 @@
-const http = require('http')
 const fs = require('fs')
 const formBody = require('body/form')
+const express = require('express')
+
+const server = express()
 
 var app = {
   rooms: {}
 }
 
-http.createServer((req, res) => {
+server.use((req, res) => {
   var name, parts
   if (req.url === '/') {
     fs.createReadStream('index.html').pipe(res)
@@ -69,7 +71,9 @@ http.createServer((req, res) => {
   } else {
     res.end('nope')
   }
-}).listen(process.env.PORT || 4321)
+})
+
+server.listen(process.env.PORT || 4321)
 
 function redirect (res, url) {
   res.writeHead(302, {
