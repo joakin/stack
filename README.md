@@ -11,7 +11,8 @@ Deployed version: [stack.wmflabs.org](http://stack.wmflabs.org)
 Run
 ---
 
-`PORT=80 node index.js`
+* Development: `npm start`
+* Production: `PORT=80 node index.js`
 
 TODO
 ----
