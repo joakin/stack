@@ -18,7 +18,7 @@ TODO
 ----
 
 * Server
-  * [ ] Migrate server to express
+  * [x] Migrate server to express
   * [ ] Clean up server code
 * Client
   * [ ] Add buildtool  for better client side asset management
