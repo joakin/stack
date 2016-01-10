@@ -8,29 +8,23 @@ var app = {
   rooms: {}
 }
 
+server.use(express.static('public'))
+
 server.use((req, res) => {
   var name, parts
-  if (req.url === '/') {
-    fs.createReadStream('index.html').pipe(res)
-  } else if (req.url === '/style.css') {
-    fs.createReadStream('style.css').pipe(res)
-  } else if (req.url === '/blast.mp3') {
-    fs.createReadStream('blast.mp3').pipe(res)
-  } else if (req.url === '/baby.mp3') {
-    fs.createReadStream('baby.mp3').pipe(res)
-  } else if (req.url === '/create' && req.method === 'POST') {
+  if (req.url === '/create' && req.method === 'POST') {
     formBody(req, {}, (err, body) =>
       err ? error(res)
         : redirect(res, `/room/${body.room_name}`).end())
   } else if (req.url === '/room/' && req.method === 'POST') {
-    fs.createReadStream('index.html').pipe(res)
+    fs.createReadStream('public/index.html').pipe(res)
   } else if (req.url.indexOf('/room/') === 0) {
     parts = req.url.match(/\/room\/(.+)/)
     name = decodeURIComponent(parts && parts[1])
     if (!name) error(res)
     else {
       app.rooms[name] = app.rooms[name] || createRoom(name)
-      fs.createReadStream('room.html').pipe(res)
+      fs.createReadStream('public/room.html').pipe(res)
     }
   } else if (req.url.indexOf('/add/') === 0 && req.method === 'POST') {
     parts = req.url.match(/\/add\/(.+)/)
