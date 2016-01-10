@@ -1,5 +1,6 @@
 const fs = require('fs')
 const formBody = require('body/form')
+const bodyParser = require('body-parser')
 const express = require('express')
 
 const server = express()
@@ -9,14 +10,19 @@ var app = {
 }
 
 server.use(express.static('public'))
+server.use(bodyParser.urlencoded({ extended: true }))
+
+server.post('/create', (req, res) => {
+  const room_name = req.body.room_name
+
+  // TODO: Validate body.room_name
+
+  res.redirect(`/room/${room_name}`)
+})
 
 server.use((req, res) => {
   var name, parts
-  if (req.url === '/create' && req.method === 'POST') {
-    formBody(req, {}, (err, body) =>
-      err ? error(res)
-        : redirect(res, `/room/${body.room_name}`).end())
-  } else if (req.url === '/room/' && req.method === 'POST') {
+  if (req.url === '/room/' && req.method === 'POST') {
     fs.createReadStream('public/index.html').pipe(res)
   } else if (req.url.indexOf('/room/') === 0) {
     parts = req.url.match(/\/room\/(.+)/)
