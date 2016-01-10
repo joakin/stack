@@ -23,7 +23,10 @@ server.get('/room/:name', (req, res) => {
 
   app.rooms[name] = app.rooms[name] || createRoom(name)
 
-  res.sendFile(__dirname + '/public/room.html')
+  res.format({
+    html: () => res.sendFile(__dirname + '/public/room.html'),
+    json: () => res.json(app.rooms[name])
+  })
 })
 
 server.post('/add/:room_name', (req, res) => {
@@ -47,27 +50,7 @@ server.post('/pop/:room_name', (req, res) => {
   res.json(app.rooms[room_name])
 })
 
-server.use((req, res) => {
-  var name, parts
-  if (req.url.indexOf('/queue/') === 0) {
-    parts = req.url.match(/\/queue\/(.+)/)
-    name = decodeURIComponent(parts && parts[1])
-    if (!name) error(res)
-    else {
-      res.end(JSON.stringify(app.rooms[name]))
-    }
-  } else {
-    res.end('nope')
-  }
-})
-
 server.listen(process.env.PORT || 4321)
-
-function error (res) {
-  res.statusCode = 500
-  res.end('error')
-  return res
-}
 
 function createRoom () {
   return { queue: [], lastUpdated: now() }

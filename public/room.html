@@ -52,7 +52,8 @@
           }
         }
       }
-      req.open('GET', '/queue/'+room_name)
+      req.open('GET', '/room/'+room_name)
+      req.setRequestHeader('Accept', 'application/json')
       req.send(null)
     }
 
