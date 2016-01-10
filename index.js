@@ -22,9 +22,7 @@ server.post('/create', (req, res) => {
 
 server.use((req, res) => {
   var name, parts
-  if (req.url === '/room/' && req.method === 'POST') {
-    fs.createReadStream('public/index.html').pipe(res)
-  } else if (req.url.indexOf('/room/') === 0) {
+  if (req.url.indexOf('/room/') === 0) {
     parts = req.url.match(/\/room\/(.+)/)
     name = decodeURIComponent(parts && parts[1])
     if (!name) error(res)
