@@ -28,26 +28,23 @@ server.get('/room/:name', (req, res) => {
   res.sendFile(__dirname + '/public/room.html')
 })
 
+server.post('/add/:room_name', (req, res) => {
+  const room_name = req.params.room_name
+  const queue_name = req.body.queue_name
+
+  // TODO: Validate `room_name` room exists
+
+  push(app.rooms[room_name] || createRoom(room_name), queue_name)
+
+  res.format({
+    json: () => res.json(app.rooms[room_name]),
+    html: () => res.redirect(`/room/${room_name}`)
+  })
+})
+
 server.use((req, res) => {
   var name, parts
-  if (req.url.indexOf('/add/') === 0 && req.method === 'POST') {
-    parts = req.url.match(/\/add\/(.+)/)
-    name = decodeURIComponent(parts && parts[1])
-    if (!name) error(res)
-    else {
-      formBody(req, {}, (err, body) => {
-        if (err) error(res)
-        else {
-          push(app.rooms[name] || createRoom(name), body.queue_name)
-          if (req.headers.accept === 'application/json') {
-            res.end(JSON.stringify(app.rooms[name]))
-          } else {
-            redirect(res, `/room/${name}`).end()
-          }
-        }
-      })
-    }
-  } else if (req.url.indexOf('/pop/') === 0 && req.method === 'POST') {
+  if (req.url.indexOf('/pop/') === 0 && req.method === 'POST') {
     parts = req.url.match(/\/pop\/(.+)/)
     name = decodeURIComponent(parts && parts[1])
     if (!name) error(res)

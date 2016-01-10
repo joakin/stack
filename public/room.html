@@ -108,6 +108,7 @@
 			}
 
 			req.open('POST', form.action)
+      req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 			req.setRequestHeader('Accept', 'application/json')
 			req.send(params)
 		}
