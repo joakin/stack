@@ -34,3 +34,7 @@ fieldset, #queue {
 #queue li {
   margin-bottom: 0.5em;
 }
+#mutebox {
+  float: right;
+  margin-right: 1em;
+}
