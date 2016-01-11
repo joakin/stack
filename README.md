@@ -11,6 +11,7 @@ Deployed version: [stack.wmflabs.org](http://stack.wmflabs.org)
 Run
 ---
 
+* `npm install`
 * Development: `npm start`
 * Production: `PORT=80 node index.js`
 
@@ -21,7 +22,7 @@ TODO
   * [x] Migrate server to express
   * [ ] Clean up server code
 * Client
-  * [ ] Add buildtool  for better client side asset management
+  * [x] Add buildtool  for better client side asset management
   * [ ] Refactor frontend using es6 and modules
 * Improvements
   * [ ] Use SSE or websockets or long polling for communication
