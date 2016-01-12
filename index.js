@@ -31,11 +31,11 @@ server.get('/room/:name', (req, res) => {
 
 server.post('/add/:room_name', (req, res) => {
   const room_name = req.params.room_name
-  const queue_name = req.body.queue_name
+  const stack_name = req.body.stack_name
 
   // TODO: Validate `room_name` room exists
 
-  push(app.rooms[room_name] || createRoom(room_name), queue_name)
+  push(app.rooms[room_name] || createRoom(room_name), stack_name)
 
   res.json(app.rooms[room_name])
 })
@@ -53,16 +53,16 @@ server.post('/pop/:room_name', (req, res) => {
 server.listen(process.env.PORT || 4321)
 
 function createRoom () {
-  return { queue: [], lastUpdated: now() }
+  return { stack: [], lastUpdated: now() }
 }
 
 function push (room, name) {
-  room.queue.push(name)
+  room.stack.push(name)
   room.lastUpdated = now()
 }
 
 function pop (room) {
-  room.queue.shift()
+  room.stack.shift()
   room.lastUpdated = now()
 }
 

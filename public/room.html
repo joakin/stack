@@ -13,17 +13,17 @@
   <h1>Stack room: </h1>
   <form id='form' method='POST' action='/add'>
     <fieldset>
-      <legend>Push to queue</legend>
-      <label for='queue_name'>Who</label>
-      <input id='queue_name' name='queue_name' type='text'/>
+      <legend>Push to stack</legend>
+      <label for='stack_name'>Who</label>
+      <input id='stack_name' name='stack_name' type='text'/>
       <input type='submit' value='Push'/>
     </fieldset>
   </form>
   <h2>
-    Queue
+    Stack
     <form id='formpop' method='POST' action='/pop'><input type='submit' value='Pop'/></form>
   </h2>
-  <ol id='queue'>
+  <ol id='stack'>
   </ol>
   <audio id='bing' volume='0.05' preload='auto' src='/blast.mp3'></audio>
   <audio id='baby' volume='0.05' preload='auto' src='/baby.mp3'></audio>

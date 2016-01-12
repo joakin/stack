@@ -1,7 +1,7 @@
 stack
 =====
 
-A web application for queueing people for intervining in a conversation.
+A web application for stacking people for intervining in a conversation.
 
 Helpful tool for facilitators and participants of meetings with a lot of people
 or on-site and remote participants.
@@ -30,6 +30,6 @@ TODO
     themselves
   * [ ] Checkbox for *I'm a facilitator* that enables being able to pop people
     from the stack (disabled by default)
-  * [ ] Being able to manage the queue (remove participants on the middle, etc)
-  * [ ] Disallow contiguous participants in queue
+  * [ ] Being able to manage the stack (remove participants on the middle, etc)
+  * [ ] Disallow contiguous participants in stack
   * [ ] Improve styles

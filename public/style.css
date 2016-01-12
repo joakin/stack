@@ -24,14 +24,14 @@ h2 form, h2 form input {
 h2 form input {
   vertical-align: middle;
 }
-fieldset, #queue {
+fieldset, #stack {
   background: #F4FAFD;
 }
-#queue {
+#stack {
   padding: 1em;
   list-style-position: inside;
 }
-#queue li {
+#stack li {
   margin-bottom: 0.5em;
 }
 #mutebox {
