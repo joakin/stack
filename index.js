@@ -50,6 +50,8 @@ server.post('/api/pop/:room_name', (req, res) => {
   res.json(app.rooms[room_name])
 })
 
+server.get('*', (req, res) => res.sendFile(__dirname + '/public/index.html'))
+
 server.listen(process.env.PORT || 4321)
 
 function createRoom (name) {
