@@ -10,7 +10,7 @@ var app = {
 server.use(express.static('public'))
 server.use(bodyParser.urlencoded({ extended: true }))
 
-server.post('/create', (req, res) => {
+server.post('/api/create', (req, res) => {
   const room_name = req.body.room_name
 
   // TODO: Validate body.room_name
@@ -18,7 +18,7 @@ server.post('/create', (req, res) => {
   res.redirect(`/room/${room_name}`)
 })
 
-server.get('/room/:name', (req, res) => {
+server.get('/api/room/:name', (req, res) => {
   const name = req.params.name
 
   app.rooms[name] = app.rooms[name] || createRoom(name)
@@ -29,7 +29,7 @@ server.get('/room/:name', (req, res) => {
   })
 })
 
-server.post('/add/:room_name', (req, res) => {
+server.post('/api/add/:room_name', (req, res) => {
   const room_name = req.params.room_name
   const stack_name = req.body.stack_name
 
@@ -40,7 +40,7 @@ server.post('/add/:room_name', (req, res) => {
   res.json(app.rooms[room_name])
 })
 
-server.post('/pop/:room_name', (req, res) => {
+server.post('/api/pop/:room_name', (req, res) => {
   const room_name = req.params.room_name
 
   // TODO: Validate `room_name` room exists
@@ -52,17 +52,17 @@ server.post('/pop/:room_name', (req, res) => {
 
 server.listen(process.env.PORT || 4321)
 
-function createRoom () {
-  return { stack: [], lastUpdated: now() }
+function createRoom (name) {
+  return { name: name, participants: [], lastUpdated: now() }
 }
 
 function push (room, name) {
-  room.stack.push(name)
+  room.participants.push(name)
   room.lastUpdated = now()
 }
 
 function pop (room) {
-  room.stack.shift()
+  room.participants.shift()
   room.lastUpdated = now()
 }
 
