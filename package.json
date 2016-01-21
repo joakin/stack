@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build:watch & nodemon index.js",
     "build:watch": "webpack-dev-server",
-    "build": "NODE_ENV=production webpack -p",
+    "build": "babel lib --out-dir build & NODE_ENV=production webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Joaquin Oltra <joaquin@chimeces.com> (http://chimeces.com)",
@@ -23,6 +23,7 @@
     "react-tap-event-plugin": "^0.2.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.4.5",
     "babel-core": "^6.4.0",
     "babel-loader": "^6.2.1",
     "babel-polyfill": "^6.3.14",
@@ -30,6 +31,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-react-hmre": "^1.0.1",
     "babel-preset-stage-0": "^6.3.13",
+    "babel-register": "^6.4.3",
     "babelify": "^7.2.0",
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
