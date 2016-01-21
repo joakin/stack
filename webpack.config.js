@@ -14,7 +14,7 @@ var config = getConfig({
 
 if (config.devServer) {
   config.devServer.proxy = {
-    '*': 'http://localhost:4321'
+    '/api/*': 'http://localhost:4321'
   }
 }
 
