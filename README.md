@@ -20,16 +20,16 @@ TODO
 
 * Server
   * [x] Migrate server to express
-  * [ ] Clean up server code
+  * [x] Clean up server code
 * Client
   * [x] Add buildtool  for better client side asset management
-  * [ ] Refactor frontend using es6 and modules
+  * [x] Refactor frontend using es6 and modules
 * Improvements
-  * [ ] Use SSE or websockets or long polling for communication
+  * [x] Use SSE or websockets or long polling for communication
   * [ ] Change participant to set name when joining before they can add
     themselves
   * [ ] Checkbox for *I'm a facilitator* that enables being able to pop people
     from the stack (disabled by default)
   * [ ] Being able to manage the stack (remove participants on the middle, etc)
-  * [ ] Disallow contiguous participants in stack
-  * [ ] Improve styles
+  * [x] Disallow contiguous participants in stack
+  * [x] Improve styles
