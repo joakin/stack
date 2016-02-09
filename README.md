@@ -6,6 +6,9 @@ A web application for stacking people for intervining in a conversation.
 Helpful tool for facilitators and participants of meetings with a lot of people
 or on-site and remote participants.
 
+See [Taking Stack (Meeting Facilitation Technique)][talking-stack] for more
+information about the technique.
+
 Deployed version: [stack.wmflabs.org](http://stack.wmflabs.org)
 
 Run
@@ -33,3 +36,5 @@ TODO
   * [ ] Being able to manage the stack (remove participants on the middle, etc)
   * [x] Disallow contiguous participants in stack
   * [x] Improve styles
+
+[talking-stack]: http://cultivate.coop/wiki/Taking_Stack_(Meeting_Facilitation_Technique)
