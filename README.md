@@ -16,7 +16,15 @@ Run
 
 * `npm install`
 * Development: `npm start`
-* Production: `PORT=80 node index.js`
+* Production:
+  1. Compile the server to es5 `npm run build`
+  2. `PORT=80 node index.js`
+
+Requirements
+---
+
+* npm version 3+
+* node.js version 4+
 
 TODO
 ----
