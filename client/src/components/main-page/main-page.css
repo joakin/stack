@@ -2,9 +2,8 @@
   margin: 0;
   padding: 1em 3em 2em;
   text-align: center;
-
-  >* {
-    vertical-align: middle;
-    margin-right: 1em;
-  }
+}
+.MainPage-form > * {
+  vertical-align: middle;
+  margin-right: 1em;
 }
