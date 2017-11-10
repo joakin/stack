@@ -73,7 +73,7 @@ server.listen(PORT, () =>
 );
 
 setInterval(() => {
-  var n = Date.now();
+  const n = Date.now();
   Object.keys(app.rooms).forEach(key => {
     if (n - new Date(app.rooms[key].lastUpdated) > 24 * 60 * 60 * 1000) {
       delete app.rooms[key];

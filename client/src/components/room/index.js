@@ -60,7 +60,7 @@ export default class Room extends React.Component {
   }
 
   setEventSource() {
-    var es = new EventSource(`/api/room/${this.props.match.params.roomName}`);
+    const es = new EventSource(`/api/room/${this.props.match.params.roomName}`);
     es.addEventListener("open", () =>
       console.log(`Connection open at ${es.url}`)
     );
