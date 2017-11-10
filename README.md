@@ -15,10 +15,11 @@ Run
 ---
 
 * `npm install`
-* Development: `npm start`
+* Development: `npm start`, open `http://localhost:3000`
 * Production:
   1. Compile everything `npm run build`
   2. `PORT=80 node index.js`
+    3. Deployables are {index.js}, {server/}, and {build/}
 
 Requirements
 ---
